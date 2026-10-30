@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Take a randomized phishing awareness quiz.">
+    <title>Phishing Quiz | PhishGuard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="/" class="brand">
+                <span class="brand-icon">🛡️</span>
+                <span>PhishGuard</span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/analyze">Analyze Email</a>
+            <a href="/quiz" class="active">Quiz</a>
+            <a href="/learn">Learn &amp; Practice</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="page-header">
+        <span class="eyebrow">RANDOMIZED KNOWLEDGE CHECK</span>
+        <h1>Test Your <span class="accent-text">Phishing IQ.</span></h1>
+        <p>
+            Every attempt selects five questions from a larger question
+            bank. Test your ability to recognize phishing warning signs
+            and learn from the explanations.
+        </p>
+    </section>
+
+    <section class="content-card">
+        <div style="display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap;">
+            <h2>🧠 Phishing Awareness Quiz</h2>
+            <p id="question-count">5 questions · 1 point each</p>
+        </div>
+
+        <p id="quiz-instructions">Choose the best answer for each question.</p>
+
+        <form id="quiz-form">
+            <div id="questions-container"></div>
+
+            <button type="submit" class="btn btn-primary">
+                Submit Answers →
+            </button>
+
+            <button type="button" id="reset-quiz" class="btn btn-secondary">
+                New Random Quiz ↻
+            </button>
+        </form>
+
+        <div id="quiz-result" class="quiz-feedback" hidden aria-live="polite">
+            <h2 id="score-heading">Your Results</h2>
+            <p id="score-text"></p>
+            <div id="answer-review"></div>
+        </div>
+    </section>
+
+    <section class="content-card">
+        <h2>💡 Security Reminder</h2>
+        <p>
+            Do not trust an email just because it looks professional.
+            Verify unexpected requests independently, inspect links
+            carefully, and never share passwords or OTPs in response
+            to suspicious messages.
+        </p>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>PhishGuard · Cybersecurity Awareness Project</p>
+    <p>Learn to recognize phishing. Think before you click.</p>
+</footer>
+
+<script>
+const questionBank = [
+    {
+        question: "An email threatens to block your account unless you act within five minutes. What is the main warning sign?",
+        options: [
+            "It uses pressure and urgent language",
+            "It includes a subject line",
+            "It contains a greeting",
+            "It arrives during working hours"
+        ],
+        answer: 0,
+        explanation: "Phishing messages often create urgency so people act without verifying the request."
+    },
+    {
+        question: "An unexpected email asks you to reply with your OTP. What should you do?",
+        options: [
+            "Send it if the message looks official",
+            "Share it only if the sender knows your name",
+            "Do not share it and verify through an official channel",
+            "Forward it to another recipient"
+        ],
+        answer: 2,
+        explanation: "Never disclose an OTP in response to an unexpected email. Verify requests independently."
+    },
+    {
+        question: "A link displays a familiar company name but its actual destination looks unfamiliar. What is the safest action?",
+        options: [
+            "Click it because the company name looks familiar",
+            "Avoid the link and visit the official website directly",
+            "Enter your credentials to check the page",
+            "Forward the link to colleagues"
+        ],
+        answer: 1,
+        explanation: "Displayed text can disguise a different destination. Use the official website or app instead."
+    },
+    {
+        question: "Which sender deserves extra scrutiny?",
+        options: [
+            "A sender whose identity you verified independently",
+            "A colleague whose message you were expecting",
+            "An address confirmed through a trusted contact",
+            "An unfamiliar address claiming to represent your bank"
+        ],
+        answer: 3,
+        explanation: "An unfamiliar sender claiming to represent a trusted organization should be verified independently."
+    },
+    {
+        question: "What should you do with an unexpected attachment from a suspicious email?",
+        options: [
+            "Open it to identify its contents",
+            "Disable antivirus protection before opening it",
+            "Avoid opening it and verify the message first",
+            "Upload it to a public website"
+        ],
+        answer: 2,
+        explanation: "Unexpected attachments may contain harmful files. Verify the sender before opening them."
+    },
+    {
+        question: "Which message is most suspicious?",
+        options: [
+            "A routine update you expected from a verified service",
+            "A message demanding your password to prevent immediate account closure",
+            "A receipt matching a purchase you made",
+            "A notification confirmed in the official app"
+        ],
+        answer: 1,
+        explanation: "Threats combined with requests for passwords are major warning signs."
+    },
+    {
+        question: "You receive a shortened link from an unknown sender. What should you remember?",
+        options: [
+            "Every shortened link is malicious",
+            "Shortened links are always safe",
+            "The sender's display name proves the link is genuine",
+            "The destination may be hidden, so verify before visiting"
+        ],
+        answer: 3,
+        explanation: "URL shorteners hide the final destination. An unfamiliar shortened link needs careful verification."
+    },
+    {
+        question: "An email has spelling mistakes. Does that alone prove it is phishing?",
+        options: [
+            "Yes, every email with a typo is malicious",
+            "No, but it can be one warning sign among others",
+            "Yes, if it contains more than one paragraph",
+            "No, spelling mistakes guarantee the email is safe"
+        ],
+        answer: 1,
+        explanation: "Writing errors can be suspicious, but you must consider the sender, links, requests, and other evidence too."
+    },
+    {
+        question: "A message unexpectedly asks you to confirm banking details through an email link. What is the best response?",
+        options: [
+            "Use the link if the email has a logo",
+            "Reply with the details instead",
+            "Avoid the link and contact the bank through an official channel",
+            "Send the message to everyone you know"
+        ],
+        answer: 2,
+        explanation: "Do not provide financial information through unexpected links. Contact the bank through a trusted channel."
+    },
+    {
+        question: "What is social engineering in a phishing attack?",
+        options: [
+            "Manipulating people into revealing information or taking unsafe actions",
+            "Updating a computer's operating system",
+            "Encrypting a file for backup",
+            "Improving an email's visual design"
+        ],
+        answer: 0,
+        explanation: "Social engineering exploits human trust, fear, curiosity, or urgency to influence behavior."
+    },
+    {
+        question: "You receive an invoice you were not expecting. What should you do before opening its attachment?",
+        options: [
+            "Open it because invoices are always safe",
+            "Enable macros if prompted",
+            "Reply with your account password",
+            "Verify the sender and whether the invoice is genuine"
+        ],
+        answer: 3,
+        explanation: "Unexpected invoices can be used to deliver malicious attachments. Verify their legitimacy first."
+    },
+    {
+        question: "What is the safest way to check a message claiming to be from your email provider?",
+        options: [
+            "Use the link in the message without checking it",
+            "Open the provider's official website or app independently",
+            "Send your password to the displayed sender",
+            "Trust the logo and colors"
+        ],
+        answer: 1,
+        explanation: "Accessing the service independently avoids relying on a potentially deceptive email link."
+    },
+    {
+        question: "Why can a professional-looking email still be phishing?",
+        options: [
+            "Professional formatting makes every message suspicious",
+            "Phishing emails cannot include company logos",
+            "Attackers can copy branding and imitate legitimate messages",
+            "Only emails with plain text are genuine"
+        ],
+        answer: 2,
+        explanation: "Attackers can imitate branding and formatting. Verify the sender and the request, not just the appearance."
+    },
+    {
+        question: "An email asks you to install an unexpected security update using an attachment. What should you do?",
+        options: [
+            "Verify the update through the official service before installing anything",
+            "Install it immediately because it says security update",
+            "Disable your security tools first",
+            "Send your credentials to confirm installation"
+        ],
+        answer: 0,
+        explanation: "Unexpected software attachments can be dangerous. Obtain updates from official sources."
+    },
+    {
+        question: "Which action best protects you from a suspected phishing email?",
+        options: [
+            "Reply to ask whether it is genuine",
+            "Click the link in private browsing mode",
+            "Download the attachment to inspect it",
+            "Avoid interacting with it and report it through the appropriate channel"
+        ],
+        answer: 3,
+        explanation: "Avoid clicking, replying, or downloading. Follow your email provider's or organization's reporting process."
+    }
+];
+
+const quizForm = document.getElementById("quiz-form");
+const questionsContainer = document.getElementById("questions-container");
+const quizResult = document.getElementById("quiz-result");
+const scoreHeading = document.getElementById("score-heading");
+const scoreText = document.getElementById("score-text");
+const answerReview = document.getElementById("answer-review");
+
+let currentQuestions = [];
+
+function shuffle(items) {
+    const result = [...items];
+
+    for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+
+    return result;
+}
+
+function createQuiz() {
+    currentQuestions = shuffle(questionBank)
+        .slice(0, 5)
+        .map(question => {
+            const shuffledOptions = shuffle(
+                question.options.map((text, index) => ({
+                    text,
+                    isCorrect: index === question.answer
+                }))
+            );
+
+            return {
+                question: question.question,
+                options: shuffledOptions,
+                explanation: question.explanation
+            };
+        });
+
+    quizResult.hidden = true;
+    scoreText.textContent = "";
+    answerReview.innerHTML = "";
+    questionsContainer.innerHTML = "";
+
+    currentQuestions.forEach((question, index) => {
+        const card = document.createElement("div");
+        card.className = "quiz-question";
+
+        const heading = document.createElement("h3");
+        heading.textContent = `${index + 1}. ${question.question}`;
+        card.appendChild(heading);
+
+        question.options.forEach((option, optionIndex) => {
+            const label = document.createElement("label");
+            const radio = document.createElement("input");
+
+            radio.type = "radio";
+            radio.name = `q${index}`;
+            radio.value = optionIndex;
+            radio.required = true;
+
+            label.appendChild(radio);
+            label.appendChild(document.createTextNode(" " + option.text));
+            card.appendChild(label);
+        });
+
+        questionsContainer.appendChild(card);
+    });
+}
+
+quizForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let score = 0;
+    answerReview.innerHTML = "";
+
+    currentQuestions.forEach((question, index) => {
+        const selected = quizForm.querySelector(
+            `input[name="q${index}"]:checked`
+        );
+
+        const chosenOption = question.options[Number(selected.value)];
+        const correctOption = question.options.find(option => option.isCorrect);
+
+        if (chosenOption.isCorrect) {
+            score++;
+        }
+
+        const card = document.createElement("div");
+        card.className = "quiz-question";
+
+        const heading = document.createElement("h3");
+        heading.textContent =
+            `Question ${index + 1}: ${chosenOption.isCorrect ? "Correct ✓" : "Review this answer"}`;
+        card.appendChild(heading);
+
+        const yourAnswer = document.createElement("p");
+        yourAnswer.textContent = "Your answer: " + chosenOption.text;
+        card.appendChild(yourAnswer);
+
+        const correctAnswer = document.createElement("p");
+        correctAnswer.textContent = "Correct answer: " + correctOption.text;
+        card.appendChild(correctAnswer);
+
+        const explanation = document.createElement("p");
+        explanation.textContent = question.explanation;
+        card.appendChild(explanation);
+
+        answerReview.appendChild(card);
+    });
+
+    scoreHeading.textContent = `Your Score: ${score} / 5`;
+
+    if (score === 5) {
+        scoreText.textContent = "Excellent! You recognized all five warning signs.";
+    } else if (score >= 3) {
+        scoreText.textContent = "Good work! Review the explanations to improve further.";
+    } else {
+        scoreText.textContent = "Keep practicing! Review the explanations and try a new quiz.";
+    }
+
+    quizResult.hidden = false;
+    quizResult.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.getElementById("reset-quiz").addEventListener("click", function() {
+    quizForm.reset();
+    createQuiz();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+createQuiz();
+</script>
+
+</body>
+</html>

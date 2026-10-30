@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analyze email text for common phishing warning signs.">
+    <title>Analyze Email | PhishGuard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="/" class="brand">
+                <span class="brand-icon">🛡️</span>
+                <span>PhishGuard</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/analyze" class="active">Analyze Email</a>
+                <a href="/quiz">Quiz</a>
+                <a href="/learn">Learn &amp; Practice</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <span class="eyebrow">EMAIL SECURITY TOOL</span>
+            <h1>Analyze an <span class="accent-text">Email.</span></h1>
+            <p>
+                Paste the text of an email below to check for common
+                phishing warning patterns. Review the findings carefully
+                before deciding whether a message is trustworthy.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>🔎 Email Analyzer</h2>
+            <p>
+                You can paste the sender details, subject, message body,
+                and any links included in the email.
+            </p>
+
+            <form action="/analyze" method="POST">
+                <div class="form-group">
+                    <label for="email_text">Email content</label>
+                    <textarea
+                        id="email_text"
+                        name="email_text"
+                        placeholder="From: example@unknown.invalid&#10;Subject: Urgent account verification&#10;&#10;Paste your sample email here..."
+                        required
+                    >{{EMAIL_TEXT}}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Analyze Email →
+                </button>
+            </form>
+
+            <p style="margin-top: 17px; font-size: 12px;">
+                Tip: Use fictional or sample email content. Avoid pasting
+                real passwords, OTPs, or other private information.
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2>Analysis Results</h2>
+            <p>
+                The tool checks for selected warning patterns. A warning
+                is a reason to investigate further, not proof that an
+                email is malicious.
+            </p>
+
+            <div class="result-box" aria-live="polite">
+                <ul>
+                    {{RESULT}}
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>What should you check?</h2>
+
+            <ul>
+                <li>Does the message pressure you to act immediately?</li>
+                <li>Is the sender's email address unfamiliar or unexpected?</li>
+                <li>Does a link lead somewhere different from what you expect?</li>
+                <li>Does the email ask for a password, OTP, or banking details?</li>
+                <li>Were you expecting any attachments in the message?</li>
+            </ul>
+
+            <a href="/learn" class="btn btn-secondary" style="margin-top: 20px;">
+                View the Phishing Checklist →
+            </a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>PhishGuard · Cybersecurity Awareness Project</p>
+        <p>Educational tool only. Automated checks cannot guarantee email safety.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn & Practice | PhishGuard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="/" class="brand">
+                <span class="brand-icon">🛡️</span>
+                <span>PhishGuard</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/analyze">Analyze Email</a>
+                <a href="/quiz">Quiz</a>
+                <a href="/learn" class="active">Learn &amp; Practice</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <header class="page-header">
+            <p class="eyebrow">LEARN CYBERSECURITY</p>
+            <h1>Learn to Spot <span class="accent-text">Phishing</span></h1>
+            <p>
+                Learn common warning signs, inspect sample emails,
+                and understand how to respond safely.
+            </p>
+        </header>
+
+        <section class="content-card">
+            <h2>Phishing Detection Checklist</h2>
+            <p>Check for these warning signs whenever you receive an email.</p>
+
+            <div class="checklist-item">
+                <strong>01. Unknown or suspicious sender</strong>
+                <p>Check the complete sender address. Attackers may use addresses that imitate trusted organizations.</p>
+            </div>
+
+            <div class="checklist-item">
+                <strong>02. Urgent or threatening language</strong>
+                <p>Messages saying “Act now” or “Your account will be blocked” may pressure you into making mistakes.</p>
+            </div>
+
+            <div class="checklist-item">
+                <strong>03. Suspicious or mismatched links</strong>
+                <p>Check where a link actually leads. A displayed company name may not match the destination website.</p>
+            </div>
+
+            <div class="checklist-item">
+                <strong>04. Requests for sensitive information</strong>
+                <p>Be suspicious of unexpected requests for passwords, OTPs, banking details, or login credentials.</p>
+            </div>
+
+            <div class="checklist-item">
+                <strong>05. Unexpected attachments</strong>
+                <p>Unexpected files may contain malware. Verify the message with the sender before opening attachments.</p>
+            </div>
+
+            <div class="checklist-item">
+                <strong>06. Suspicious spelling or unusual offers</strong>
+                <p>Unexpected prizes, strange wording, or offers that seem too good to be true deserve extra scrutiny.</p>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2>Sample Email Analysis</h2>
+            <p>
+                These fictional examples demonstrate common phishing signs.
+                The example links use reserved invalid domains and are not intended to be opened.
+            </p>
+
+            <article class="sample-email">
+                <h3>Sample 1: Urgent Account Warning</h3>
+                <p><strong>From:</strong> account-alert@example.invalid</p>
+                <p><strong>Subject:</strong> Final Warning — Account Will Be Blocked</p>
+                <p>
+                    Your account will be blocked immediately.
+                    Verify your password within 10 minutes to avoid losing access.
+                    Visit https://account-check.example.invalid to continue.
+                </p>
+                <details>
+                    <summary>Show suspicious signs</summary>
+                    <ul>
+                        <li>Uses threatening and urgent language.</li>
+                        <li>Creates pressure with a 10-minute deadline.</li>
+                        <li>Requests a password.</li>
+                        <li>Uses an unfamiliar example domain.</li>
+                    </ul>
+                </details>
+            </article>
+
+            <article class="sample-email">
+                <h3>Sample 2: Suspicious Bank Message</h3>
+                <p><strong>From:</strong> security-team@example.invalid</p>
+                <p><strong>Subject:</strong> Verify Your Banking Details</p>
+                <p>
+                    We detected a problem with your account.
+                    Confirm your banking details and OTP at
+                    https://unknown-bank.example.invalid to prevent account suspension.
+                </p>
+                <details>
+                    <summary>Show suspicious signs</summary>
+                    <ul>
+                        <li>Requests sensitive banking information and an OTP.</li>
+                        <li>Uses fear of account suspension.</li>
+                        <li>The sender identity is not verified.</li>
+                        <li>The destination domain does not establish that it belongs to a real bank.</li>
+                    </ul>
+                </details>
+            </article>
+
+            <article class="sample-email">
+                <h3>Sample 3: Prize Notification</h3>
+                <p><strong>From:</strong> winner-notice@example.invalid</p>
+                <p><strong>Subject:</strong> Congratulations! Claim Your Prize Now</p>
+                <p>
+                    You have won a special reward!
+                    Claim it immediately by visiting
+                    https://claim-prize.example.invalid.
+                    Provide your personal details to receive your prize.
+                </p>
+                <details>
+                    <summary>Show suspicious signs</summary>
+                    <ul>
+                        <li>Unexpected prize or reward.</li>
+                        <li>Urgent instruction to claim immediately.</li>
+                        <li>Requests personal information.</li>
+                        <li>Unknown sender and unverified destination.</li>
+                    </ul>
+                </details>
+            </article>
+
+            <article class="sample-email">
+                <h3>Sample 4: Unexpected Attachment</h3>
+                <p><strong>From:</strong> document-sharing@example.invalid</p>
+                <p><strong>Subject:</strong> Invoice Overdue — Open Immediately</p>
+                <p>
+                    Your invoice is overdue. Open the attached file
+                    named Invoice_Update.zip immediately to avoid a penalty.
+                    Contact us only through the details in this email.
+                </p>
+                <details>
+                    <summary>Show suspicious signs</summary>
+                    <ul>
+                        <li>Pressures the recipient to act immediately.</li>
+                        <li>Includes an unexpected compressed attachment.</li>
+                        <li>Uses a possible financial penalty to create fear.</li>
+                        <li>Sender identity and invoice should be verified independently.</li>
+                    </ul>
+                </details>
+            </article>
+        </section>
+
+        <section class="content-card">
+            <h2>Short Findings Report</h2>
+
+            <p><strong>Project:</strong> Phishing Email Identifier</p>
+            <p><strong>Objective:</strong> Identify common warning signs in suspicious emails.</p>
+
+            <h3>Method</h3>
+            <p>
+                Four fictional email examples were reviewed using a checklist
+                covering sender identity, urgent language, suspicious links,
+                sensitive-information requests, and unexpected attachments.
+            </p>
+
+            <h3>Findings</h3>
+            <ul>
+                <li>All four examples contain multiple warning signs.</li>
+                <li>Urgency and fear are used to pressure recipients.</li>
+                <li>Some messages request sensitive personal or financial information.</li>
+                <li>Unknown senders, unverified links, and unexpected attachments require caution.</li>
+            </ul>
+
+            <h3>Conclusion</h3>
+            <p>
+                Users should verify the sender through an independent trusted
+                channel, inspect link destinations carefully, avoid sharing
+                passwords or OTPs, and never open unexpected attachments
+                without verification.
+            </p>
+
+            <p><strong>Important:</strong> This is an educational demonstration.
+                Real phishing emails may look professional, and the absence of
+                these warning signs does not prove that an email is safe.</p>
+        </section>
+
+        <div class="hero-actions">
+            <a href="/analyze" class="btn btn-primary">Analyze an Email</a>
+            <a href="/quiz" class="btn btn-secondary">Take the Quiz</a>
+        </div>
+    </main>
+
+<footer class="site-footer">
+    <p>PhishGuard · Cybersecurity Awareness Project</p>
+    <p>Explore, learn, and stay one step ahead of cyber threats.</p>
+</footer>
+
+</body>
+</html>
