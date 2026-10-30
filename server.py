@@ -4,6 +4,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 from html import escape
 import re
+import os
 
 BASE_DIR = Path(__file__).resolve().parent
 TEMPLATE_DIR = BASE_DIR / "templates"
@@ -232,15 +233,17 @@ class PhishingHandler(BaseHTTPRequestHandler):
         )
 
 
-if __name__ == "__main__":
-    server = HTTPServer(("127.0.0.1", 8000), PhishingHandler)
+host = "0.0.0.0"
+port = int(os.environ.get("PORT", 8000))
 
-    print("Phishing Email Identifier V2 is running!")
-    print("Open http://localhost:8000 in your browser.")
-    print("Press Ctrl+C to stop the server.")
+server = HTTPServer((host, port), PhishingHandler)
 
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        print("\nServer stopped.")
-        server.server_close()
+print("PhishGuard is running!")
+print("Open your website in your browser.")
+print("Press Ctrl+C to stop the server.")
+
+try:
+    server.serve_forever()
+except KeyboardInterrupt:
+    print("\nServer stopped.")
+    server.server_close()
