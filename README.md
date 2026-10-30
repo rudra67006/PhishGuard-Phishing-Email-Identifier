@@ -58,7 +58,7 @@ phishing-email-identifier/
 ### 1. Clone the Repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_LINK
+git clone https://github.com/rudra67006/PhishGuard-Phishing-Email-Identifier.git
 ```
 
 ### 2. Navigate to the Project Folder
@@ -107,7 +107,7 @@ The objective of this project is to spread cybersecurity awareness by helping us
 
 ## GitHub Repository
 
-**Repository Link:** YOUR_GITHUB_REPOSITORY_LINK
+**Repository Link:** https://github.com/rudra67006/PhishGuard-Phishing-Email-Identifier
 
 ## Disclaimer
 
